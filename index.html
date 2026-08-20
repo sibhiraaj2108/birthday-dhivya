@@ -225,23 +225,87 @@
     <!-- Central Lock Card -->
     <div class="lock-card" id="lock-card">
       <div class="lock-icon" aria-hidden="true">
-        <span class="icon-emoji">💙</span>
+        <span class="icon-emoji">🎂</span>
       </div>
-      <h1 class="lock-heading">Surprise For Dhivya</h1>
-      <p class="lock-subtext">Enter the password to unwrap your gift&nbsp;✨</p>
 
-      <form id="lock-form" autocomplete="off" novalidate>
-        <div class="input-wrapper" id="input-wrapper">
-          <input type="password" id="password-input" class="password-input" placeholder="Enter password…"
-            aria-label="Password" maxlength="64" required />
+      <p class="card-teaser-pill">✨ SOMETHING SPECIAL IS WAITING ✨</p>
+      <h1 class="lock-heading">THE SURPRISE UNLOCKS IN</h1>
+
+      <!-- ── COUNTDOWN TILES ── -->
+      <div class="tiles-row" id="countdown-grid">
+
+        <div class="tile-unit">
+          <div class="tile-3d">
+            <div class="tile-face">
+              <span class="tile-number" id="cd-days">00</span>
+            </div>
+          </div>
+          <span class="tile-label">DAYS</span>
         </div>
-        <p class="error-message" id="error-message" role="alert" aria-live="polite">
-          Hmm, that's not quite right 🥺 Try again!
-        </p>
-        <button type="submit" class="unlock-btn" id="unlock-btn">
-          <span class="btn-text">Open Your Surprise 🎁</span>
+
+        <div class="tile-separator" aria-hidden="true">
+          <span class="sep-dot"></span>
+          <span class="sep-dot"></span>
+        </div>
+
+        <div class="tile-unit">
+          <div class="tile-3d">
+            <div class="tile-face">
+              <span class="tile-number" id="cd-hours">00</span>
+            </div>
+          </div>
+          <span class="tile-label">HOURS</span>
+        </div>
+
+        <div class="tile-separator" aria-hidden="true">
+          <span class="sep-dot"></span>
+          <span class="sep-dot"></span>
+        </div>
+
+        <div class="tile-unit">
+          <div class="tile-3d">
+            <div class="tile-face">
+              <span class="tile-number" id="cd-mins">00</span>
+            </div>
+          </div>
+          <span class="tile-label">MINUTES</span>
+        </div>
+
+        <div class="tile-separator" aria-hidden="true">
+          <span class="sep-dot"></span>
+          <span class="sep-dot"></span>
+        </div>
+
+        <div class="tile-unit">
+          <div class="tile-3d">
+            <div class="tile-face">
+              <span class="tile-number" id="cd-secs">00</span>
+            </div>
+          </div>
+          <span class="tile-label">SECONDS</span>
+        </div>
+
+      </div>
+
+      <!-- ── EARLY UNLOCK ── -->
+      <div class="early-unlock-section">
+        <button type="button" class="toggle-password-btn" id="toggle-password-btn">
+          <span class="icon">🔑</span> Enter Password to Unlock Early
         </button>
-      </form>
+
+        <form id="lock-form" class="lock-form" autocomplete="off" novalidate style="display: none;">
+          <div class="input-wrapper" id="input-wrapper">
+            <input type="password" id="password-input" class="password-input" placeholder="Enter password…"
+              aria-label="Password" maxlength="64" required />
+          </div>
+          <p class="error-message" id="error-message" role="alert" aria-live="polite">
+            Hmm, that's not quite right 🥺 Try again!
+          </p>
+          <button type="submit" class="unlock-btn" id="unlock-btn">
+            <span class="btn-text">Open Your Surprise 🎁</span>
+          </button>
+        </form>
+      </div>
     </div>
   </div>
   <!-- / LOCK SCREEN OVERLAY -->

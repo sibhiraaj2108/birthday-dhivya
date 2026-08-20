@@ -47,13 +47,84 @@ function handleWrongPassword() {
 function showError() { errorMessage.classList.add("visible"); }
 function hideError() { errorMessage.classList.remove("visible"); }
 
+const togglePasswordBtn = document.getElementById("toggle-password-btn");
+
+if (togglePasswordBtn && lockForm) {
+  togglePasswordBtn.addEventListener("click", function () {
+    const isHidden = lockForm.style.display === "none" || lockForm.style.display === "";
+    lockForm.style.display = isHidden ? "block" : "none";
+    if (isHidden && passwordInput) {
+      passwordInput.focus();
+    }
+  });
+}
+
 if (passwordInput) {
   passwordInput.addEventListener("input", function () {
     if (errorMessage.classList.contains("visible")) hideError();
   });
-  window.addEventListener("load", function () {
-    passwordInput.focus();
-  });
+}
+
+/* ============================================================
+   LIVE BIRTHDAY COUNTDOWN TIMER
+============================================================ */
+const TARGET_MONTH = 7;   // August (0-indexed: 7 = August)
+const TARGET_DAY = 21;    // 21st
+const TARGET_HOURS = 0;   // 0 = 12:00 AM Midnight
+const TARGET_MINUTES = 0;
+const TARGET_SECONDS = 0;
+
+const cdDays  = document.getElementById("cd-days");
+const cdHours = document.getElementById("cd-hours");
+const cdMins  = document.getElementById("cd-mins");
+const cdSecs  = document.getElementById("cd-secs");
+
+function getBirthdayTargetDate() {
+  const now = new Date();
+  let targetYear = now.getFullYear();
+  let target = new Date(targetYear, TARGET_MONTH, TARGET_DAY, TARGET_HOURS, TARGET_MINUTES, TARGET_SECONDS);
+  if (now.getTime() > target.getTime() + (24 * 3600 * 1000)) {
+    target = new Date(targetYear + 1, TARGET_MONTH, TARGET_DAY, TARGET_HOURS, TARGET_MINUTES, TARGET_SECONDS);
+  }
+  return target;
+}
+
+function setDigitValueWithPulse(el, newValue) {
+  if (!el) return;
+  if (el.textContent !== newValue) {
+    el.textContent = newValue;
+    el.classList.remove("tick-pulse");
+    void el.offsetWidth;
+    el.classList.add("tick-pulse");
+  }
+}
+
+function updateLockCountdown() {
+  const now = new Date();
+  const targetDate = getBirthdayTargetDate();
+  const diff = targetDate.getTime() - now.getTime();
+
+  if (diff <= 0) {
+    setDigitValueWithPulse(cdDays,  "00");
+    setDigitValueWithPulse(cdHours, "00");
+    setDigitValueWithPulse(cdMins,  "00");
+    setDigitValueWithPulse(cdSecs,  "00");
+  } else {
+    const days  = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs  = Math.floor((diff % (1000 * 60)) / 1000);
+
+    setDigitValueWithPulse(cdDays,  String(days).padStart(2, '0'));
+    setDigitValueWithPulse(cdHours, String(hours).padStart(2, '0'));
+    setDigitValueWithPulse(cdMins,  String(mins).padStart(2, '0'));
+    setDigitValueWithPulse(cdSecs,  String(secs).padStart(2, '0'));
+  }
+}
+
+if (cdDays) {
+  updateLockCountdown();
+  setInterval(updateLockCountdown, 1000);
 }
 
 
