@@ -1,7 +1,7 @@
 /* ============================================================
    PASSWORD & LOCK SCREEN UNLOCK
 ============================================================ */
-const CORRECT_PASSWORD = "21082006";
+const CORRECT_PASSWORD = "21082006@00";
 
 const lockScreen = document.getElementById("lock-screen");
 const lockForm = document.getElementById("lock-form");
